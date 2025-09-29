@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Express Capital Network Associate Application</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: #888; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+    .custom-border-color { border-color: #1D3460; }
+    .disclaimer-box {
+      background-color: #e0f2f7;
+      border: 2px solid #1D3460;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: #333;
+    }
+    .disclaimer-box strong { color: #1D3460; }
+    .form-container {
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+    .sms-disclaimer-box {
+      background-color: white;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="apply-now" class="bg-white p-8 rounded-xl shadow-2xl border-4 custom-border-color max-w-2xl w-full form-container mx-auto">
+    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-2 text-center leading-tight">Express Capital Network Associate</h1>
+    <p class="text-lg text-gray-600 mb-2 text-center">Your Partner in Business Funding Solutions</p>
+    <p class="text-md text-blue-700 font-semibold mb-8 text-center">Please fill out the form below to submit your request.</p>
+
+    <div class="disclaimer-box">
+      <p class="font-bold mb-2 text-center">Important Disclaimer:</p>
+      <p><strong>Express Capital Network Associate is not a lender or a bank.</strong> We do not provide loans or make credit decisions. Our service connects businesses like yours with a network of trusted third‑party funding providers who offer Merchant Cash Advances (MCAs) and other commercial financing products.</p>
+      <p class="mt-2">A Merchant Cash Advance (MCA) is a purchase of future receivables, not a loan. It is not subject to the same regulatory requirements as traditional loans and may have different terms and conditions. Please be aware that MCAs may involve higher costs compared to traditional financing options.</p>
+      <p class="mt-2">All funding offers are subject to the individual provider's underwriting and approval processes. Express Capital Network Associate may receive a referral fee or commission if your business is funded through one of our partners. We strongly advise you to consult with a qualified financial advisor to determine if an MCA or any other financing product is suitable for your specific business needs.</p>
+      <p class="mt-2">By submitting this application, you agree to be contacted by phone, SMS, or email regarding commercial financing products, in accordance with our <a href="https://www.expresscapassociates.com/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Privacy Policy</a>.</p>
+    </div>
+
+    <form action="https://formspree.io/f/xdkdagzp" method="POST" class="space-y-8">
+            <div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Contact Information</h3>
+        <div class="mb-5"><label for="fullName" class="block text-gray-700 text-sm font-semibold mb-2">Full Name:</label><input type="text" id="fullName" name="fullName" required class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="John Doe"></div>
+        <div class="mb-5"><label for="email" class="block text-gray-700 text-sm font-semibold mb-2">Email Address:</label><input type="email" id="email" name="email" required class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="name@example.com"></div>
+        <div class="mb-5"><label for="phoneNumber" class="block text-gray-700 text-sm font-semibold mb-2">Phone Number:</label><input type="tel" id="phoneNumber" name="phoneNumber" required class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="(123) 456-7890"></div>
+                <div class="sms-disclaimer-box flex items-start">
+          <input type="checkbox" id="smsCheckbox" name="smsDisclaimer" class="form-checkbox h-5 w-5 text-blue-600 mt-0.5" required>
+          <label for="smsCheckbox" class="ml-4 text-sm text-gray-700">
+            By checking this box, I consent to receive text messages related to my application/status from Express Capital Network Associates. You can reply "STOP" at any time to opt-out. Message and data rates may apply. Message frequency may vary. text HELP to (929) 346-8635 for assistance. For more information, please refer to our <a href="https://www.expresscapassociates.com/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">privacy policy</a> and SMS Terms and Conditions on our website.
+          </label>
+        </div>
+        <div class="mb-5"><label class="block text-gray-700 text-sm font-semibold mb-2">Best Time to Contact:</label><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center"><input type="radio" name="bestContactTime" value="morning" class="form-radio text-blue-600 h-5 w-5" required><span class="ml-2 text-gray-700">Morning (9 AM - 12 PM)</span></label><label class="inline-flex items-center"><input type="radio" name="bestContactTime" value="afternoon" class="form-radio text-blue-600 h-5 w-5"><span class="ml-2 text-gray-700">Afternoon (12 PM - 5 PM)</span></label><label class="inline-flex items-center"><input type="radio" name="bestContactTime" value="evening" class="form-radio text-blue-600 h-5 w-5"><span class="ml-2 text-gray-700">Evening (5 PM - 8 PM)</span></label></div></div>
+        <div class="mb-5"><label class="block text-gray-700 text-sm font-semibold mb-2">Preferred Contact Method:</label><div class="flex flex-wrap gap-x-4 gap-y-2"><label class="inline-flex items-center"><input type="radio" name="preferredContactMethod" value="call" class="form-radio text-blue-600 h-5 w-5" required><span class="ml-2 text-gray-700">Call</span></label><label class="inline-flex items-center"><input type="radio" name="preferredContactMethod" value="text" class="form-radio text-blue-600 h-5 w-5"><span class="ml-2 text-gray-700">Text</span></label><label class="inline-flex items-center"><input type="radio" name="preferredContactMethod" value="email" class="form-radio text-blue-600 h-5 w-5"><span class="ml-2 text-gray-700">Email</span></label></div></div>
+      </div>
+
+            <div>
+        <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Business Details</h3>
+        <div class="mb-5"><label for="businessName" class="block text-gray-700 text-sm font-semibold mb-2">Business Name or DBA:</label><input type="text" id="businessName" name="businessName" required class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your Business Name or DBA"></div>
+        <div class="mb-5"><label for="businessType" class="block text-gray-700 text-sm font-semibold mb-2">What type of business do you own?</label><select id="businessType" name="businessType" required onchange="toggleOtherBusinessType(this)" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg shadow-sm leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">Select a business type</option><option value="retail">Retail Store</option><option value="restaurant_food_service">Restaurant / Food Service</option><option value="e_commerce">E-commerce / Online Store</option><option value="construction_trades">Construction / Trades (Plumbing, Electrical, HVAC)</option><option value="healthcare_medical">Healthcare / Medical Practice</option><option value="professional_services">Professional Services (Consulting, Legal, Accounting)</option><option value="automotive">Automotive (Repair, Dealership)</option><option value="hospitality_lodging">Hospitality / Lodging (Hotels, Motels, B&Bs)</option><option value="manufacturing">Manufacturing / Production</option><option value="transportation_logistics">Transportation / Logistics</option><option value="beauty_salon_spa">Beauty Salon / Spa</option><option value="fitness_gym">Fitness / Gym</option><option value="real_estate">Real Estate / Property Management</option><option value="tech_software">Technology / Software</option><option value="agriculture">Agriculture</option><option value="non_profit">Non-Profit Organization</option><option value="other">Other (Please specify)</option></select><div id="otherBusinessTypeContainer" class="mt-3 hidden"><input type="text" id="otherBusinessType" name="otherBusinessType" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Specify your business type"></div></div>
+        <div class="mb-5"><label for="businessDuration" class="block text-gray-700 text-sm font-semibold mb-2">How long have you been in business?</label><select id="businessDuration" name="businessDuration" required class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg shadow-sm leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">Select an option</option><option value="less_than_6_months">Less than 6 months</option><option value="6_months_1_year">6 months - 1 year</option><option value="1_3_years">1 - 3 years</option><option value="3 - 5_years">3 - 5 years</option><option value="5_10_years">5 - 10 years</option><option value="10_plus_years">10+ years</option></select></div>
+        <div class="mb-5"><label for="monthlyRevenue" class="block text-gray-700 text-sm font-semibold mb-2">What is your monthly revenue?</label><input type="number" id="monthlyRevenue" name="monthlyRevenue" required min="0" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="e.g., 10000"></div>
+        <div class="mb-5"><label for="fundingReason" class="block text-gray-700 text-sm font-semibold mb-2">What is the primary reason you are seeking funding?</label><select id="fundingReason" name="fundingReason" required onchange="toggleOtherFundingReason(this)" class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg shadow-sm leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">Select a reason</option><option value="working_capital">General Working Capital / Cash Flow</option><option value="inventory_purchase">Inventory Purchase</option><option value="equipment_purchase_repair">Equipment Purchase or Repair</option><option value="marketing_advertising">Marketing & Advertising Campaigns</option><option value="business_expansion">Business Expansion / Renovation</option><option value="payroll_expenses">Payroll Expenses</option><option value="debt_consolidation">Debt Consolidation</option><option value="bridge_financing">Bridge Financing (e.g., waiting on invoices)</option><option value="emergency_funds">Emergency Funds / Unexpected Expenses</option><option value="seasonal_needs">Seasonal Business Needs</option><option value="new_product_development">New Product/Service Development</option><option value="hiring_staff">Hiring New Staff</option><option value="real_estate_acquisition">Real Estate Acquisition</option><option value="franchise_fee">Franchise Fee / Acquisition</option><option value="other">Other (Please specify)</option></select><div id="otherFundingReasonContainer" class="mt-3 hidden"><textarea id="otherFundingReason" name="otherFundingReason" rows="2" maxlength="500" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Please describe your reason for funding in 100 words or less."></textarea><p class="text-xs text-gray-500 text-right"><span id="otherFundingReasonWordCount">0</span>/100 words</p></div></div>
+        <div class="mb-5"><label for="personalCreditScore" class="block text-gray-700 text-sm font-semibold mb-2">What is your personal credit score?</label><select id="personalCreditScore" name="personalCreditScore" required class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg shadow-sm leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"></select></div>
+        <div class="mb-5"><label class="block text-gray-700 text-sm font-semibold mb-2">Do you have a business website?</label><div class="flex items-center space-x-4"><label class="inline-flex items-center"><input type="radio" name="hasWebsite" value="yes" class="form-radio text-blue-600 h-5 w-5" onchange="toggleWebsiteUrl(true)"><span class="ml-2 text-gray-700">Yes</span></label><label class="inline-flex items-center"><input type="radio" name="hasWebsite" value="no" class="form-radio text-blue-600 h-5 w-5" onchange="toggleWebsiteUrl(false)"><span class="ml-2 text-gray-700">No</span></label></div><div id="websiteUrlContainer" class="mt-3 hidden"><label for="websiteUrl" class="block text-gray-700 text-xs font-semibold mb-1">Website URL:</label><input type="url" id="websiteUrl" name="websiteUrl" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="www.yourbusiness.com" onfocus="autoPopulateHttps(this)"></div></div>
+        <div class="mb-5"><label for="commentBox" class="block text-gray-700 text-sm font-semibold mb-2">Tell us more about your funding needs or any other comments (max 400 words):</label><textarea id="commentBox" name="comments" rows="6" maxlength="2000" class="shadow-sm appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Describe your needs here..."></textarea><p class="text-xs text-gray-500 text-right"><span id="commentBoxWordCount">0</span>/400 words</p></div>
+      </div>
+
+      <div class="flex justify-center mt-8"><button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">Submit Application</button></div>
+    </form>
+
+  </div>
+
+  <script>
+    function toggleOtherBusinessType(selectElement) {
+      const container = document.getElementById('otherBusinessTypeContainer');
+      const input = document.getElementById('otherBusinessType');
+      if (selectElement.value === 'other') {
+        container.classList.remove('hidden');
+        input.required = true;
+      } else {
+        container.classList.add('hidden');
+        input.required = false;
+        input.value = '';
+      }
+    }
+    function toggleWebsiteUrl(show) {
+      const container = document.getElementById('websiteUrlContainer');
+      const input = document.getElementById('websiteUrl');
+      if (show) {
+        container.classList.remove('hidden');
+        input.required = true;
+      } else {
+        container.classList.add('hidden');
+        input.required = false;
+        input.value = '';
+      }
+    }
+    function autoPopulateHttps(input) {
+      if (input.value === '') {
+        input.value = 'https://www.';
+      }
+    }
+    function toggleOtherFundingReason(selectElement) {
+      const container = document.getElementById('otherFundingReasonContainer');
+      const textarea = document.getElementById('otherFundingReason');
+      if (selectElement.value === 'other') {
+        container.classList.remove('hidden');
+        textarea.required = true;
+      } else {
+        container.classList.add('hidden');
+        textarea.required = false;
+        textarea.value = '';
+        document.getElementById('otherFundingReasonWordCount').textContent = '0';
+      }
+    }
+    function setupWordCount(textareaId, countId, maxWords) {
+      const textarea = document.getElementById(textareaId);
+      const countSpan = document.getElementById(countId);
+      if (!textarea || !countSpan) return;
+      textarea.addEventListener('input', () => {
+        const words = textarea.value.trim().split(/\s+/).filter(w => w.length > 0);
+        const current = words.length;
+        if (current > maxWords) {
+          textarea.value = words.slice(0, maxWords).join(' ');
+          countSpan.textContent = maxWords;
+        } else {
+          countSpan.textContent = current;
+        }
+      });
+      const initialWords = textarea.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+      countSpan.textContent = initialWords > maxWords ? maxWords : initialWords;
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      setupWordCount('commentBox', 'commentBoxWordCount', 400);
+      setupWordCount('otherFundingReason', 'otherFundingReasonWordCount', 100);
+      const businessType = document.getElementById('businessType');
+      if (businessType) toggleOtherBusinessType(businessType);
+      const fundingReason = document.getElementById('fundingReason');
+      if (fundingReason) toggleOtherFundingReason(fundingReason);
+      document.querySelectorAll('input[name="hasWebsite"]').forEach(radio => {
+        if (radio.checked) toggleWebsiteUrl(radio.value === 'yes');
+      });
+      const pcs = document.getElementById('personalCreditScore');
+      if (pcs) {
+        for (let i = 300; i <= 900; i++) {
+          const opt = document.createElement('option');
+          opt.value = i;
+          opt.textContent = i;
+          pcs.appendChild(opt);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
