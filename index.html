@@ -84,16 +84,10 @@
   .print-btn { background-color: #98fb98; color: #006400; }
   .clear-btn { background-color: #ff0000; color: #ffffff; }
   .disclaimer-scroll-container { height: 150px; overflow-y: scroll; border: 1px solid #006400; padding: 10px; margin-bottom: 20px; background-color: #e6f2e6; }
-  /* Website field display fix */
   .website-url-field { display: none; margin-top: 10px; }
-  .website-url-field input { border-left: 4px solid #246e3a; border-radius: 5px; } 
+  .website-url-field .url-prefix { background-color: #e9ecef; border: 1px solid #ccc; padding: 10px; border-right: none; border-radius: 5px 0 0 5px; }
+  .website-url-field input { border-left: none; border-radius: 0 5px 5px 0; }
   .field-label { font-weight: bold; color: #246e3a; margin-bottom: 5px; }
-
-  /* New CSS for the Partner Information section */
-  #partner-info-section {
-    display: none; /* Hidden by default - JS will control this */
-  }
-
   @media (max-width: 768px) {
     .form-container { width: 95%; margin: 10px auto; padding: 10px; }
     .field-group { flex-direction: column; }
@@ -104,9 +98,6 @@
     button { width: 100%; margin-bottom: 10px; }
     #signature-pad { width: 100%; }
     .upload-section .banner { font-size: 18px; }
-    /* Adjusted website field for smaller screens */
-    .website-url-field { flex-direction: column; }
-    .website-url-field input { border-left: 4px solid #246e3a; border-radius: 5px; }
   }
 </style>
 </head>
@@ -226,7 +217,10 @@
         </div>
         <div class="field website-url-field" id="website-field">
             <label class="field-label">Website URL:</label>
-            <input type="url" name="website" placeholder="yourwebsite.com">
+            <div style="display: flex;">
+                <span class="url-prefix">https://www.</span>
+                <input type="url" name="website" placeholder="yourwebsite.com">
+            </div>
         </div>
     </div>
     <div class="field-group">
@@ -308,9 +302,8 @@
     </div>
     <div class="field-group">
         <div class="field">
-            <label class="field-label">Ownership Percentage (0-100):</label>
+            <label class="field-label">Ownership Percentage:</label>
             <input type="text" name="ownership_percentage" id="ownership_percentage" required>
-            <small style="color: #ff0000; font-weight: bold;">*Partner Info is required if % is less than 100*</small>
         </div>
         <div class="field">
             <label class="field-label">Home Address:</label>
@@ -402,10 +395,9 @@
     </div>
     <label class="field-label">Cell Number:</label>
     <input type="tel" name="owner_cell" id="owner_cell" required>
-    
-    <div id="partner-info-section">
-        <h3 class="section-title">BUSINESS PARTNER/OFFICER INFORMATION</h3>
-        <p style="text-align: center; color: #ff0000; font-weight: bold; margin-top: -10px;">*Required for all owners with less than 100% ownership*</p>
+
+    <div id="partner-info-section" style="display: none;">
+        <h3 class="section-title">PARTNER INFORMATION (Required for less than 100% ownership)</h3>
         <div class="field-group">
             <div class="field">
                 <label class="field-label">Corporate Officer/Partner Name:</label>
@@ -418,7 +410,7 @@
         </div>
         <div class="field-group">
             <div class="field">
-                <label class="field-label">Ownership Percentage (0-100):</label>
+                <label class="field-label">Ownership Percentage (Partner's):</label>
                 <input type="text" name="partner_ownership_percentage">
             </div>
             <div class="field">
@@ -546,23 +538,46 @@
 <script>
   function toggleWebsiteField(show) {
     const websiteField = document.getElementById('website-field');
-    const websiteInput = websiteField.querySelector('input[name="website"]');
-    
-    // Set display style
     websiteField.style.display = show ? 'flex' : 'none';
+  }
 
-    if (show) {
-      // FIX: Set autofill prefix to https://www. when "Yes" is selected
-      if (websiteInput.value === '' || websiteInput.value === 'https://www.') {
-        websiteInput.value = 'https://www.';
-      }
+  // NEW: Logic to show/hide Partner Information
+  const ownershipPercentageInput = document.getElementById('ownership_percentage');
+  const partnerInfoSection = document.getElementById('partner-info-section');
+
+  function togglePartnerInfo() {
+    const value = ownershipPercentageInput.value.trim();
+    const percentage = parseInt(value, 10);
+    
+    // Show the partner section if value is present and less than 100
+    if (value.length > 0 && percentage < 100) {
+      partnerInfoSection.style.display = 'block';
+      // Make partner fields required when section is visible
+      setPartnerFieldsRequired(true);
     } else {
-      // Clear the field when hiding it
-      websiteInput.value = '';
+      partnerInfoSection.style.display = 'none';
+      // Remove required attribute when section is hidden
+      setPartnerFieldsRequired(false);
     }
   }
 
-  // --- Signature Pad Logic (Kept as is) ---
+  function setPartnerFieldsRequired(isRequired) {
+    const fields = partnerInfoSection.querySelectorAll('input, select');
+    fields.forEach(field => {
+        // Only set required if the field is not hidden and has a name
+        if (field.name && field.name !== 'partner_state') {
+            field.required = isRequired;
+        } else if (field.name === 'partner_state') {
+            field.required = isRequired;
+        }
+    });
+  }
+
+  ownershipPercentageInput.addEventListener('input', togglePartnerInfo);
+  // Also run on load in case the browser remembers a previous value
+  document.addEventListener('DOMContentLoaded', togglePartnerInfo); 
+
+
   const canvas = document.getElementById('signature-pad');
   const ctx = canvas.getContext('2d');
   let drawing = false;
@@ -619,7 +634,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  // --- Formatting Logic (Kept as is) ---
+  // Autofill $ on number inputs
   const monthlyRevenueInput = document.getElementById('monthly_revenue');
   const fundingAmountInput = document.getElementById('funding_amount');
 
@@ -633,8 +648,9 @@
   monthlyRevenueInput.addEventListener('input', formatCurrency);
   fundingAmountInput.addEventListener('input', formatCurrency);
 
+  // SSN formatting logic
   const ssnInput = document.getElementById('ssn');
-  const partnerSsnInput = document.getElementById('partner_ssn'); 
+  const partnerSsnInput = document.getElementById('partner_ssn'); // NEW Partner SSN
 
   function formatSSN(e) {
     let value = e.target.value.replace(/\D/g, '');
@@ -652,11 +668,15 @@
   }
 
   ssnInput.addEventListener('input', formatSSN);
-  if (partnerSsnInput) partnerSsnInput.addEventListener('input', formatSSN);
+  if (partnerSsnInput) {
+      partnerSsnInput.addEventListener('input', formatSSN); // Apply to partner SSN
+  }
 
+
+  // Phone number formatting logic
   const phoneInput = document.getElementById('phone');
   const ownerCellInput = document.getElementById('owner_cell');
-  const partnerCellInput = document.getElementById('partner_cell'); 
+  const partnerCellInput = document.getElementById('partner_cell'); // NEW Partner Cell
 
   function formatPhoneNumber(e) {
     let value = e.target.value.replace(/\D/g, '');
@@ -675,60 +695,29 @@
   
   phoneInput.addEventListener('input', formatPhoneNumber);
   ownerCellInput.addEventListener('input', formatPhoneNumber);
-  if (partnerCellInput) partnerCellInput.addEventListener('input', formatPhoneNumber);
+  if (partnerCellInput) {
+      partnerCellInput.addEventListener('input', formatPhoneNumber); // Apply to partner cell
+  }
   
+  // Date of Birth formatting logic
   const dobInput = document.getElementById('owner_dob');
-  const partnerDobInput = document.getElementById('partner_dob'); 
+  const partnerDobInput = document.getElementById('partner_dob'); // NEW Partner DOB
 
-  function formatDateOfBirth(e) {
-      let value = e.target.value.replace(/\D/g, ''); 
+  function formatDOB(e) {
+      let value = e.target.value.replace(/\D/g, ''); // Remove all non-numeric characters
       let formattedValue = '';
       if (value.length === 8) {
           formattedValue = value.substring(0, 2) + '/' + value.substring(2, 4) + '/' + value.substring(4, 8);
           e.target.value = formattedValue;
       }
   }
-
-  dobInput.addEventListener('blur', formatDateOfBirth);
-  if (partnerDobInput) partnerDobInput.addEventListener('blur', formatDateOfBirth);
-
-
-  // --- LOGIC: Show/Hide Partner Info based on Ownership Percentage ---
-
-  const ownershipPercentageInput = document.getElementById('ownership_percentage');
-  const partnerInfoSection = document.getElementById('partner-info-section');
-
-  function togglePartnerInfo() {
-      // Clean and parse the value
-      const percentageValue = parseFloat(ownershipPercentageInput.value.replace(/[^0-9.]/g, ''));
-
-      // The section displays if the percentage is less than 100
-      if (!isNaN(percentageValue) && percentageValue < 100) {
-          partnerInfoSection.style.display = 'block';
-          setPartnerFieldsRequired(true);
-      } else {
-          partnerInfoSection.style.display = 'none';
-          setPartnerFieldsRequired(false);
-      }
+  
+  dobInput.addEventListener('blur', formatDOB);
+  if (partnerDobInput) {
+      partnerDobInput.addEventListener('blur', formatDOB); // Apply to partner DOB
   }
 
-  function setPartnerFieldsRequired(required) {
-      const partnerFields = partnerInfoSection.querySelectorAll('input, select');
-      partnerFields.forEach(field => {
-          field.required = required;
-          if (!required) {
-              field.value = ''; // Clear values when hidden
-          }
-      });
-  }
 
-  // Attach the toggle function to the input event
-  ownershipPercentageInput.addEventListener('input', togglePartnerInfo);
-
-  // Initial check on page load
-  document.addEventListener('DOMContentLoaded', togglePartnerInfo);
-  // Also call it once after a small delay in case the embed platform interferes with DOMContentLoaded
-  window.addEventListener('load', togglePartnerInfo);
 </script>
 
 </body>
