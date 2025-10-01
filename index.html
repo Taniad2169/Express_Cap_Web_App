@@ -423,7 +423,6 @@
 
         <form id="applicationForm" action="https://formspree.io/f/xjkakgpo" method="POST">
             
-            <!-- Page 1: Business Information -->
             <div class="page-section active" id="page1">
                 <div class="page-indicator">Page 1 of 6</div>
                 <h2 class="section-title">BUSINESS INFORMATION</h2>
@@ -631,7 +630,6 @@
                 </div>
             </div>
 
-            <!-- Page 2: Funding Information -->
             <div class="page-section" id="page2">
                 <div class="page-indicator">Page 2 of 6</div>
                 <h2 class="section-title">FUNDING INFORMATION</h2>
@@ -678,7 +676,6 @@
                 </div>
             </div>
 
-            <!-- Page 3: Merchant/Owner Information -->
             <div class="page-section" id="page3">
                 <div class="page-indicator">Page 3 of 6</div>
                 <h2 class="section-title">MERCHANT/OWNER INFORMATION</h2>
@@ -785,4 +782,356 @@
                         <input type="date" id="dob" name="dob" required>
                     </div>
                     <div class="form-group">
-                        <label for="ficoScore
+                        <label for="ficoScore">FICO Score *</label>
+                        <input type="text" id="ficoScore" name="fico_score" required>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage(2)">← Previous</button>
+                    <button type="button" onclick="nextPage(4)">Next Page →</button>
+                </div>
+            </div>
+
+            <div class="page-section" id="page4">
+                <div class="page-indicator">Page 4 of 6</div>
+                <h2 class="section-title">FINANCIAL & BANKING INFORMATION</h2>
+
+                <div class="animated-banner">
+                    <h3><span class="pointer">👇</span> IMPORTANT: Upload Bank Statements First <span class="pointer">👇</span></h3>
+                    <p>To give you the best offer, we need 3 months of recent business bank statements.</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bankName">Primary Bank Name *</label>
+                        <input type="text" id="bankName" name="bank_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountHolder">Account Holder Name *</label>
+                        <input type="text" id="accountHolder" name="account_holder" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="routingNumber">Routing Number *</label>
+                        <input type="text" id="routingNumber" name="routing_number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountNumber">Account Number *</label>
+                        <input type="text" id="accountNumber" name="account_number" required>
+                    </div>
+                </div>
+
+                <div class="form-row full">
+                    <div class="form-group">
+                        <label for="otherDebt">Total Amount of Existing Business Debt/Advances (if any)</label>
+                        <input type="text" id="otherDebt" name="other_debt" placeholder="$">
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage(3)">← Previous</button>
+                    <button type="button" onclick="nextPage(5)">Next Page →</button>
+                </div>
+            </div>
+
+            <div class="page-section" id="page5">
+                <div class="page-indicator">Page 5 of 6</div>
+                <h2 class="section-title">REQUIRED DOCUMENTS (UPLOAD)</h2>
+                <p style="margin-bottom: 25px; color: #cc0000; font-weight: bold;">Maximum file size is 10MB per file. Please upload PDF or image files (JPG, PNG).</p>
+
+                <div class="upload-section">
+                    <div class="upload-item">
+                        <label for="bankStatement1">1. Recent Month Business Bank Statement *</label>
+                        <input type="file" id="bankStatement1" name="bank_statement_1" accept=".pdf, .jpg, .jpeg, .png" required>
+                    </div>
+                    <div class="upload-item">
+                        <label for="bankStatement2">2. Previous Month Business Bank Statement *</label>
+                        <input type="file" id="bankStatement2" name="bank_statement_2" accept=".pdf, .jpg, .jpeg, .png" required>
+                    </div>
+                    <div class="upload-item">
+                        <label for="bankStatement3">3. 2 Months Ago Business Bank Statement *</label>
+                        <input type="file" id="bankStatement3" name="bank_statement_3" accept=".pdf, .jpg, .jpeg, .png" required>
+                    </div>
+                </div>
+
+                <div class="upload-section">
+                    <p style="color: #24345e; font-weight: bold; margin-bottom: 15px;">Optional Documents (May speed up approval):</p>
+                    <div class="upload-item">
+                        <label for="voidedCheck">4. Voided Business Check</label>
+                        <input type="file" id="voidedCheck" name="voided_check" accept=".pdf, .jpg, .jpeg, .png">
+                    </div>
+                    <div class="upload-item">
+                        <label for="driversLicense">5. Owner's Driver's License</label>
+                        <input type="file" id="driversLicense" name="drivers_license" accept=".pdf, .jpg, .jpeg, .png">
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage(4)">← Previous</button>
+                    <button type="button" onclick="nextPage(6)">Next Page →</button>
+                </div>
+            </div>
+
+            <div class="page-section" id="page6">
+                <div class="page-indicator">Page 6 of 6</div>
+                <h2 class="section-title">AUTHORIZATION & SIGNATURE</h2>
+
+                <div class="disclaimer-text">
+                    **AUTHORIZATION AGREEMENT:** I (We), the undersigned, as the owner/officer of the applicant business, hereby authorize Express Capital Associates and its agents, successors, or assigns (collectively, "Lender") to contact, obtain, and share any and all information about the Applicant and its Owners, including but not limited to, credit reports, credit history, account balances, and any other financial information from any source, including banks, creditors, and credit bureaus. This authorization extends to multiple inquiries over time for the purpose of pre-qualification, application review, credit decision, and any future maintenance or collection. I (We) authorize the release of such information to the Lender and agree that a copy of this authorization shall be as valid as the original. I (We) certify that all information contained in this Application is true and complete.
+                </div>
+
+                <div class="acknowledge-checkbox">
+                    <input type="checkbox" id="acknowledge" required>
+                    <label for="acknowledge">I have read, understand, and agree to the Authorization Agreement above. *</label>
+                </div>
+
+                <div class="signature-section">
+                    <h4>Owner/Officer Electronic Signature *</h4>
+                    <canvas id="signaturePad"></canvas>
+                    <input type="hidden" id="signatureData" name="signature_data">
+                    <div class="action-buttons">
+                        <button type="button" id="clearSignatureBtn" class="cancel-btn">Clear Signature</button>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" onclick="prevPage(5)">← Previous</button>
+                    <button type="submit" id="submitButton" disabled>Submit Application</button>
+                </div>
+
+            </div>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            Application Submitted Successfully! We will be in touch shortly.
+        </div>
+    </div>
+
+    <div class="email-modal" id="emailModal">
+        <div class="email-modal-content">
+            <h3>Confirm Submission Email</h3>
+            <p>Please confirm or enter the best email to send your application details to:</p>
+            <input type="email" id="confirmEmailInput" required>
+            <div class="email-modal-buttons">
+                <button type="button" class="cancel-btn" onclick="closeEmailModal()">Cancel</button>
+                <button type="button" onclick="handleFormSubmission()">Send & Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <script>
+        const form = document.getElementById('applicationForm');
+        const pages = document.querySelectorAll('.page-section');
+        const submitButton = document.getElementById('submitButton');
+        const acknowledgeCheckbox = document.getElementById('acknowledge');
+        const emailModal = document.getElementById('emailModal');
+        const confirmEmailInput = document.getElementById('confirmEmailInput');
+
+        let currentPage = 1;
+
+        // --- Signature Pad Setup ---
+        const canvas = document.getElementById('signaturePad');
+        // Check if canvas is available before initializing SignaturePad
+        let signaturePad;
+        if (canvas) {
+            signaturePad = new SignaturePad(canvas);
+        }
+        
+        const clearSignatureBtn = document.getElementById('clearSignatureBtn');
+        const signatureDataInput = document.getElementById('signatureData');
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext('2d').scale(ratio, ratio);
+            signaturePad.clear(); // Important: clears the signature on resize
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        // Only run if signaturePad was successfully initialized
+        if (signaturePad) {
+            resizeCanvas(); // Initial call to set canvas size
+            
+            clearSignatureBtn.addEventListener('click', function () {
+                signaturePad.clear();
+                updateSubmitButtonState();
+            });
+
+            signaturePad.addEventListener("endStroke", updateSubmitButtonState);
+        }
+
+        function updateSubmitButtonState() {
+            const isSigned = signaturePad ? !signaturePad.isEmpty() : false;
+            const isAcknowledged = acknowledgeCheckbox.checked;
+
+            if (currentPage === 6) {
+                submitButton.disabled = !(isSigned && isAcknowledged);
+            }
+        }
+
+        acknowledgeCheckbox.addEventListener('change', updateSubmitButtonState);
+
+
+        // --- Page Navigation and Validation ---
+
+        function showPage(pageNumber) {
+            pages.forEach((page, index) => {
+                page.classList.remove('active');
+                if (index === pageNumber - 1) {
+                    page.classList.add('active');
+                    currentPage = pageNumber;
+                    
+                    if (pageNumber === 6) {
+                        updateSubmitButtonState();
+                        // Re-size the canvas when the signature page becomes visible
+                        resizeCanvas();
+                    }
+                }
+            });
+            // Scroll to the top of the container
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function validatePage(pageNumber) {
+            const page = document.getElementById(`page${pageNumber}`);
+            const requiredInputs = page.querySelectorAll('[required]');
+            let allValid = true;
+
+            requiredInputs.forEach(input => {
+                // Check if the input is one of a radio group and if one is checked
+                if (input.type === 'radio') {
+                    const radioGroupName = input.name;
+                    if (!page.querySelector(`input[name="${radioGroupName}"]:checked`)) {
+                        allValid = false;
+                        // For radios, we'll mark the first radio label/parent div
+                        const radioGroup = input.closest('.form-group') || input.closest('.radio-group');
+                        if (radioGroup) {
+                            radioGroup.style.border = '2px solid #cc0000';
+                            radioGroup.style.borderRadius = '5px';
+                        }
+                    } else {
+                        const radioGroup = input.closest('.form-group') || input.closest('.radio-group');
+                        if (radioGroup) {
+                            radioGroup.style.border = 'none';
+                        }
+                    }
+                } 
+                // Simple check for other required fields
+                else if (!input.value.trim() || (input.type === 'file' && input.files.length === 0)) {
+                    allValid = false;
+                    input.style.borderColor = '#cc0000'; 
+                } else {
+                    input.style.borderColor = '#24345e';
+                }
+            });
+
+            return allValid;
+        }
+
+        // Global functions for button clicks
+        window.nextPage = function(nextPageNumber) {
+            if (validatePage(currentPage)) {
+                showPage(nextPageNumber);
+            } else {
+                alert('Please fill out all required fields (*) before proceeding.');
+            }
+        }
+
+        window.prevPage = function(prevPageNumber) {
+            showPage(prevPageNumber);
+        }
+
+        // --- Form Submission and Email Modal ---
+
+        function openEmailModal() {
+            // Pre-fill email from Page 1
+            const businessEmail = document.getElementById('email').value;
+            confirmEmailInput.value = businessEmail;
+            emailModal.style.display = 'flex';
+        }
+
+        window.closeEmailModal = function() {
+            emailModal.style.display = 'none';
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the default submission
+            
+            // Final check for page 6
+            if (!validatePage(6) || signaturePad.isEmpty() || !acknowledgeCheckbox.checked) {
+                alert('Please complete all required fields, acknowledge the authorization, and provide a signature.');
+                return;
+            }
+
+            // Convert signature to data URL and set the hidden input value
+            const dataURL = signaturePad.toDataURL("image/png");
+            signatureDataInput.value = dataURL;
+
+            // Show the confirmation modal
+            openEmailModal();
+        });
+
+        window.handleFormSubmission = function() {
+            const finalEmail = confirmEmailInput.value;
+            if (!finalEmail || !finalEmail.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Set the final email as a hidden field for Formspree to use as a reply-to address
+            let emailField = form.querySelector('input[name="_replyto"]');
+            if (!emailField) {
+                emailField = document.createElement('input');
+                emailField.type = 'hidden';
+                emailField.name = '_replyto';
+                form.appendChild(emailField);
+            }
+            emailField.value = finalEmail;
+
+            // Close modal and prepare for submission
+            closeEmailModal();
+            
+            // Use an AJAX-like submission to handle the file uploads and display success message
+            const formData = new FormData(form);
+            
+            // Display a submitting message
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                // Formspree requires no Content-Type header when submitting FormData with files
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success
+                    form.style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    const pageIndicator = document.querySelector('.page-indicator');
+                    if (pageIndicator) pageIndicator.style.display = 'none';
+                } else {
+                    // Failure (e.g., Formspree error)
+                    alert('There was an error submitting your application. Please try again or contact us directly.');
+                    submitButton.textContent = 'Submit Application';
+                    submitButton.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Submission error:', error);
+                alert('Network error. Please check your connection and try again.');
+                submitButton.textContent = 'Submit Application';
+                submitButton.disabled = false;
+            });
+        }
+
+    </script>
+</body>
+</html>
