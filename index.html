@@ -304,6 +304,13 @@
             height: 200px;
         }
 
+        .signature-required {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
@@ -448,7 +455,7 @@
             <h2>Soaring Above the Competition</h2>
         </div>
 
-        <form id="applicationForm" action="https://formspree.io/f/xjkakgpo" method="POST" enctype="multipart/form-data">
+        <form id="applicationForm" action="https://formspree.io/f/xzzjgdyk" method="POST" enctype="multipart/form-data">
             
             <!-- Page 1: Business Information -->
             <div class="page-section active" id="page1">
@@ -939,6 +946,7 @@
                     <h4>ELECTRONIC SIGNATURE</h4>
                     <p>Please provide your electronic signature below:</p>
                     <canvas id="signaturePad"></canvas>
+                    <div class="signature-required" id="signatureRequired">* Signature is required</div>
                     <div style="margin-top: 10px;">
                         <button type="button" onclick="clearSignature()">Clear Signature</button>
                     </div>
@@ -959,7 +967,8 @@
         </div>
 
         <div class="success-message" id="successMessage">
-            Your application has been submitted successfully! We will contact you within 2 business days.
+            <h3>Thank you for submitting your application!</h3>
+            <p>We will contact you within a few hours.</p>
         </div>
     </div>
 
@@ -1089,10 +1098,14 @@
         });
 
         // Signature Pad functionality
-        let signaturePad;
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let ctx;
+
         function initSignaturePad() {
             const canvas = document.getElementById('signaturePad');
-            const ctx = canvas.getContext('2d');
+            ctx = canvas.getContext('2d');
             
             // Set canvas size
             canvas.width = canvas.offsetWidth;
@@ -1104,9 +1117,8 @@
             ctx.lineJoin = 'round';
             ctx.strokeStyle = '#24345e';
             
-            let isDrawing = false;
-            let lastX = 0;
-            let lastY = 0;
+            // Clear canvas initially
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             // Mouse events
             canvas.addEventListener('mousedown', startDrawing);
@@ -1118,74 +1130,79 @@
             canvas.addEventListener('touchstart', handleTouchStart);
             canvas.addEventListener('touchmove', handleTouchMove);
             canvas.addEventListener('touchend', stopDrawing);
+        }
+        
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = getCoordinates(e);
+        }
+        
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
             
-            function startDrawing(e) {
-                isDrawing = true;
-                [lastX, lastY] = getCoordinates(e);
+            const [x, y] = getCoordinates(e);
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+            
+            [lastX, lastY] = [x, y];
+            
+            // Update hidden field with signature data
+            document.getElementById('signatureData').value = canvas.toDataURL();
+            document.getElementById('signatureRequired').style.display = 'none';
+        }
+        
+        function stopDrawing() {
+            isDrawing = false;
+            document.getElementById('signatureData').value = canvas.toDataURL();
+        }
+        
+        function getCoordinates(e) {
+            const canvas = document.getElementById('signaturePad');
+            let x, y;
+            if (e.type.includes('touch')) {
+                x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
+                y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
+            } else {
+                x = e.offsetX;
+                y = e.offsetY;
             }
-            
-            function draw(e) {
-                if (!isDrawing) return;
-                e.preventDefault();
-                
-                const [x, y] = getCoordinates(e);
-                
-                ctx.beginPath();
-                ctx.moveTo(lastX, lastY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
-                
-                [lastX, lastY] = [x, y];
-                
-                // Update hidden field with signature data
-                document.getElementById('signatureData').value = canvas.toDataURL();
+            return [x, y];
+        }
+        
+        function handleTouchStart(e) {
+            if (e.touches.length === 1) {
+                startDrawing(e);
             }
-            
-            function stopDrawing() {
-                isDrawing = false;
-                document.getElementById('signatureData').value = canvas.toDataURL();
-            }
-            
-            function getCoordinates(e) {
-                let x, y;
-                if (e.type.includes('touch')) {
-                    x = e.touches[0].clientX - canvas.getBoundingClientRect().left;
-                    y = e.touches[0].clientY - canvas.getBoundingClientRect().top;
-                } else {
-                    x = e.offsetX;
-                    y = e.offsetY;
-                }
-                return [x, y];
-            }
-            
-            function handleTouchStart(e) {
-                if (e.touches.length === 1) {
-                    startDrawing(e);
-                }
-            }
-            
-            function handleTouchMove(e) {
-                if (e.touches.length === 1) {
-                    draw(e);
-                }
+        }
+        
+        function handleTouchMove(e) {
+            if (e.touches.length === 1) {
+                draw(e);
             }
         }
         
         function clearSignature() {
             const canvas = document.getElementById('signaturePad');
-            const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             document.getElementById('signatureData').value = '';
+            document.getElementById('signatureRequired').style.display = 'block';
         }
 
         // Application submission
         function submitApplication() {
-            if (!validateCurrentPage(6)) {
-                alert('Please complete all required fields including the acknowledgment and signature.');
+            // Check if disclaimer is acknowledged
+            if (!document.getElementById('acknowledge').checked) {
+                alert('Please acknowledge the disclaimer statement.');
                 return;
             }
             
+            // Check if signature is provided
             if (!document.getElementById('signatureData').value) {
+                document.getElementById('signatureRequired').style.display = 'block';
                 alert('Please provide your electronic signature.');
                 return;
             }
